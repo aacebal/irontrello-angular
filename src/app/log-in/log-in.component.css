@@ -1,0 +1,6 @@
+.error{
+  color: crimson;
+  padding: 10px;
+  border-radius: 3px;
+  border: solid 1px crimson;
+}
