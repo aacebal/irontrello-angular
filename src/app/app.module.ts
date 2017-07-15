@@ -10,9 +10,9 @@ import { ListsPageComponent } from './lists-page/lists-page.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
-import { SessionService } from './services/session.service';
-import { ListService } from './services/list.service';
 import { CardService } from './services/card.service';
+import { ListService } from './services/list.service';
+import { SessionService } from './services/session.service';
 
 @NgModule({
   declarations: [
@@ -29,10 +29,10 @@ import { CardService } from './services/card.service';
     HttpModule
   ],
   providers: [
-    SessionService,
+    CardService,
     ListService,
-    CardService
-],
+    SessionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

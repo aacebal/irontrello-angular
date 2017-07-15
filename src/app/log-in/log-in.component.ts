@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SessionService } from '../services/session.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -14,20 +14,23 @@ export class LogInComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor( private session: SessionService, private router: Router ) { }
+  constructor(
+    private sessionThang: SessionService,
+    private routerThang: Router
+  ) { }
 
   ngOnInit() {
   }
 
   submitLogin() {
-    this.session.login(this.formEmail, this.formPassword)
-      .then(() => {
-        this.router.navigate(['/lists']);
-      })
-      .catch((errResponse) => {
-        const apiInfo = errResponse.json();
-        this.errorMessage = apiInfo.message;
-      })
+      this.sessionThang.login(this.formEmail, this.formPassword)
+        .then((userFromApi) => {
+            this.routerThang.navigate(['/lists']);
+            this.sessionThang.loggedIn(userFromApi);
+        })
+        .catch((errResponse) => {
+            const apiInfo = errResponse.json();
+            this.errorMessage = apiInfo.message;
+        });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SessionService } from './services/session.service';
@@ -11,18 +11,40 @@ import { SessionService } from './services/session.service';
 export class AppComponent {
   title = 'app';
 
+  isLoggedIn: boolean = false;
+
   constructor(
-    private session: SessionService,
-    private router: Router
+    private sessionThang: SessionService,
+    private routerThang: Router
   ) { }
 
   ngOnInit() {
-    this.session.checkLogin()
-      .then((userInfo) => {
-        this.router.navigate(['/lists']);
-      })
-      .catch(err => {
-        this.router.navigate(['/'])
-      })
+      this.sessionThang.loggedIn$.subscribe((userFromApi) => {
+          this.isLoggedIn = true;
+      });
+
+      this.sessionThang.checkLogin()
+        // if logged in, redirect to /lists
+        .then((userInfo) => {
+            this.routerThang.navigate(['/lists']);
+            this.isLoggedIn = true;
+        })
+        // else redirect to /
+        .catch((err) => {
+            this.routerThang.navigate(['/']);
+        });
+  }
+
+  logMeOut() {
+      this.sessionThang.logout()
+        .then(() => {
+            this.routerThang.navigate(['/']);
+            this.isLoggedIn = false;
+        })
+        .catch(() => {});
+  }
+
+  handleLogin(userFromApi) {
+      this.isLoggedIn = true;
   }
 }

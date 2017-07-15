@@ -1,18 +1,19 @@
-<h3>Log In</h3>
+<h3> Log In </h3>
 
 <p class="error" *ngIf="errorMessage">
   {{ errorMessage }}
 </p>
 
 <form (ngSubmit)="submitLogin()">
-  <label id="email-input"> Email </label>
-  <input id="email-input" type="email" placeholder="blah@example.com"
-    [(ngModel)]="formEmail" name="formEmail">
+  <label for="email-input"> Email </label>
+  <input  id="email-input" type="email" placeholder="blah@example.com"
+      [(ngModel)]="formEmail" name="formEmail">
   <br>
-  <label id="password-input"> Email </label>
-  <input id="password-input" type="password" placeholder="*****"
-    [(ngModel)]="formPassword" name="formPassword">
-  <br>
-  <button> Log In </button>
 
+  <label for="password-input"> Password </label>
+  <input  id="password-input" type="password" placeholder="*****"
+      [(ngModel)]="formPassword" name="formPassword">
+  <br>
+
+  <button> Log In </button>
 </form>
