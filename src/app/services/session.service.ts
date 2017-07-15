@@ -29,5 +29,12 @@ export class SessionService {
       .then(res => res.json())
   }
 
+  signup(userInfo) {
+    return this.http.post(
+      this.baseUrl + '/signup', userInfo)
+      .toPromise()
+      .then(res => res.json())
+  }
+
 
 }
